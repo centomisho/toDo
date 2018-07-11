@@ -10,7 +10,7 @@ import UIKit
 
 class ToDoListViewController: UITableViewController {
     
-    let itemArray = ["work", "study", "house"]
+    var itemArray = ["work", "study", "house"]
     
 
     override func viewDidLoad() {
@@ -23,14 +23,17 @@ class ToDoListViewController: UITableViewController {
         let addItemAlert = UIAlertController(title: "add item", message: nil, preferredStyle: .alert)
         addItemAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         addItemAlert.addTextField { (textField) in
-            textField.text = "sdd list item"
+            textField.placeholder = "add list item"
         }
         addItemAlert.addAction(UIAlertAction(title: "add", style: .default, handler: { (action) in
             if let item = addItemAlert.textFields?.first?.text{
-                print(item)
+                self.itemArray.append(item)
+                self.tableView.reloadData()
+                print(self.itemArray)
             }
         }))
         self.present(addItemAlert, animated: true)
+        
     }
     
     
